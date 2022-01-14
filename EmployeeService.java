@@ -18,22 +18,20 @@ public class EmployeeService extends Employee {
         return null;
     }
 
-    public Employee[] getByName (String name) {
-        Employee [] employeesName = new Employee[employees.length];
-            for( int i = 0; i < employees.length; i++) {
-                Employee currentEmployees = employees[i];
-                if (isSimilar(currentEmployees, name)) {
-                    employeesName[i] = currentEmployees;
-                }
-                return null;
+    public Employee[] getByName(String name) {
+        Employee[] employeesName = new Employee[employees.length];
+        for (int i = 0; i < employees.length; i++) {
+            Employee currentEmployees = employees[i];
+            if (isSimilar(currentEmployees, name)) {
+                employeesName[i] = currentEmployees; // не допрацьована логіка
             }
-            return employeesName;
+        }
+        return employeesName;
     }
 
-    static boolean isSimilar (Employee first, String name) {
+    static boolean isSimilar(Employee first, String name) {
         String firstName = first.name;
-        return firstName.compareTo(name) == 0;
-
+        return firstName.compareTo(name) == 0; // порівняння стрінги і клас тип
     }
 
 
@@ -49,12 +47,12 @@ public class EmployeeService extends Employee {
     }
 
     public Employee[] sortByName(Employee[] employees) {
-        Employee result = null;
+        Employee result;
         for (int i = 0; i < employees.length; i++) {
             for (int j = 1; j < employees.length - 1; j++) {
                 Employee employee1 = employees[j - 1];
                 Employee employee2 = employees[i];
-                if (isBigger(employee1, employee2)) {
+                if (isBiggerName(employee1, employee2)) {
                     result = employees[j - 1];
                     employees[j - 1] = employees[i];
                     employees[i] = result;
@@ -64,11 +62,17 @@ public class EmployeeService extends Employee {
         return employees;
     }
 
-    static boolean isBigger(Employee first, Employee second) {
+    public boolean isBiggerName(Employee first, Employee second) {
         String firstName = first.name;
         String secondName = second.name;
         return firstName.compareTo(secondName) > 0;
     }
+
+    /*static boolean isBigger(Employee first, Employee second) {
+        String firstName = first.name;
+        String secondName = second.name;
+        return firstName.compareTo(secondName) > 0;
+    }*/
 
     public double calculateSalaryAndBonus(int rate, int workedDays, int fixedBugs, int salary) {
         Random random = new Random();
@@ -80,6 +84,23 @@ public class EmployeeService extends Employee {
         developerSalary = (salary + fixedBugs * 5) * (random.nextBoolean() ? 2 : 0);
         resultSalary = designerSalary + developerSalary + managerSalary;
         return resultSalary;
+    }
+
+    public Employee[] sortByNameAndSalary(Employee[] employees) { //незавершена логіка
+        //Employee [] result = new Employee[employees.length];
+        Employee pmb ;
+        for (int i = 0; i < employees.length; i++) {
+            for (int j = 0; j < employees.length - 1; j++) {
+                Employee employeeSalary1 = employees[i];
+                Employee employeeSalary2 = employees[j + 1];
+                if (employeeSalary1.salary > employeeSalary2.salary) {
+                    pmb = employees[i];
+                    employees[i] = employees[j + 1];
+                    employees[j + 1] = pmb;
+                }
+            }
+        }
+        return employees;
     }
 
 

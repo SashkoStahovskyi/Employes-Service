@@ -38,7 +38,7 @@ public class Test {
 
         System.out.println("================Print Information ================");
 
-        employeeService.printEmployees(defaultEmployers);
+         employeeService.printEmployees(defaultEmployers);
 
         System.out.println("================ sortByName ================");
 
@@ -60,11 +60,11 @@ public class Test {
         Employee[] name = employeeService.getByName(findName);
         employeeService.printEmployees(name);// виводить всих працівників, але потрібен лише той чиє імя задано !!
 
+        System.out.println("================ sortByNameAndSalary ================");
 
-
-
-
-
+        Employee [] sortSalary = employeeService.sortByNameAndSalary(employeeFactory.generateEmployees(5));
+        employeeService.printEmployees(sortSalary);
+        //System.out.println(Arrays.toString(sortSalary));
 
 
     }

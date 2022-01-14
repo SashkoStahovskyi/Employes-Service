@@ -1,8 +1,7 @@
-
 import java.lang.*;
 import java.util.Comparator;
 
-public class Employee implements Comparable<Employee>,Comparator<Employee> {
+public class Employee {
     int id;
     String name;
     int age;
@@ -15,12 +14,12 @@ public class Employee implements Comparable<Employee>,Comparator<Employee> {
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         return "name:" + this.name;
     }
 
 
-    @Override
+    /*@Override
     public int compareTo(Employee employee) {
         return name.compareTo(employee.getName());
     }
@@ -29,5 +28,5 @@ public class Employee implements Comparable<Employee>,Comparator<Employee> {
     @Override
     public int compare(Employee o1, Employee o2) {
         return 0;
-    }
+    } */
 }
