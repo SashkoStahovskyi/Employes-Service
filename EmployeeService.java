@@ -18,31 +18,32 @@ public class EmployeeService extends Employee {
         return null;
     }
 
+
     public Employee[] getByName(String name) {
-        Employee[] employeesName = new Employee[employees.length];
-        for (int i = 0; i < employees.length; i++) {
-            Employee currentEmployees = employees[i];
-            if (isSimilar(currentEmployees, name)) {
-                employeesName[i] = currentEmployees; // не допрацьована логіка
+        int count = 0;
+        for (Employee employee : employees) {
+            if (Objects.equals(employee.name, name)) {
+                count++;
             }
         }
-        return employeesName;
+        Employee[] nameArray = new Employee[count];
+        int index = 0;
+        for (Employee employeeSecond : employees) {
+            if (Objects.equals(employeeSecond.name, name)) {
+                nameArray[index] = employeeSecond;
+                index++;
+            }
+        }
+        return nameArray;
     }
 
-    static boolean isSimilar(Employee first, String name) {
-        String firstName = first.name;
-        return firstName.compareTo(name) == 0; // порівняння стрінги і клас тип
-    }
-
-
-    public void printEmployees(Employee[] employee) {
+    public void printEmployees(Employee[] employees) {
         for (Employee currentEmployees : employees) {
             System.out.println("Employee Id " + currentEmployees.id);
             System.out.println("Employee name " + currentEmployees.name);
             System.out.println("Employee salary " + currentEmployees.salary);
             System.out.println("Employee gender " + currentEmployees.gender);
             System.out.println("Employee age " + currentEmployees.age);
-            System.out.println();
         }
     }
 
@@ -50,9 +51,9 @@ public class EmployeeService extends Employee {
         Employee result;
         for (int i = 0; i < employees.length; i++) {
             for (int j = 1; j < employees.length - 1; j++) {
-                Employee employee1 = employees[j - 1];
-                Employee employee2 = employees[i];
-                if (isBiggerName(employee1, employee2)) {
+                Employee employeeFirst = employees[j - 1];
+                Employee employeeSecond = employees[i];
+                if (isBiggerName(employeeFirst, employeeSecond)) {
                     result = employees[j - 1];
                     employees[j - 1] = employees[i];
                     employees[i] = result;
@@ -68,12 +69,6 @@ public class EmployeeService extends Employee {
         return firstName.compareTo(secondName) > 0;
     }
 
-    /*static boolean isBigger(Employee first, Employee second) {
-        String firstName = first.name;
-        String secondName = second.name;
-        return firstName.compareTo(secondName) > 0;
-    }*/
-
     public double calculateSalaryAndBonus(int rate, int workedDays, int fixedBugs, int salary) {
         Random random = new Random();
         int designerSalary, developerSalary, resultSalary;
@@ -86,17 +81,17 @@ public class EmployeeService extends Employee {
         return resultSalary;
     }
 
-    public Employee[] sortByNameAndSalary(Employee[] employees) { //незавершена логіка
-        //Employee [] result = new Employee[employees.length];
-        Employee pmb ;
+    public Employee[] sortByNameAndSalary(Employee[] employees) { // працює не коректно
+
         for (int i = 0; i < employees.length; i++) {
-            for (int j = 0; j < employees.length - 1; j++) {
-                Employee employeeSalary1 = employees[i];
-                Employee employeeSalary2 = employees[j + 1];
-                if (employeeSalary1.salary > employeeSalary2.salary) {
-                    pmb = employees[i];
-                    employees[i] = employees[j + 1];
-                    employees[j + 1] = pmb;
+            for (int j = 1; j < employees.length - 1; j++) {
+                Employee employeeFirst = employees[j - 1];
+                Employee employeeSecond = employees[j];
+
+                if (isBiggerName(employeeFirst, employeeSecond) && (employeeFirst.salary > employeeSecond.salary)) {
+                    Employee temp = employees[j - 1];
+                    employees[j - 1] = employees[j];
+                    employees[j] = temp;
                 }
             }
         }

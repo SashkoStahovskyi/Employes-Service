@@ -17,16 +17,19 @@ public class EmployeeFactory extends Employee {
                 "man", 5, 24);
         Designer designer1 = new Designer(6, "Taras", 33, 4000,
                 "man", 7, 22);
+        Designer designer2 = new Designer(6, "Sasha", 33, 4000,
+                "man", 7, 22);
+
 
         Manager manager = new Manager("Nazar", 7, 29, 4500, "man");
 
 
-        Employee[] employeeFactory = {developer, developer1, developer2, developer3, designer, designer1, manager};
+        Employee[] employeeFactory = {developer, developer1, developer2, developer3, designer, designer1,designer2, manager};
         return employeeFactory;
     }
 
     Employee[] generateEmployees(int size) { // потрыбно допрацювати
-        String[] employeeName = {"Sasha", "Yuriy","Olga:Woman", "Nazar", "Artem", "Maks"};
+        String[] employeeName = {"Sasha", "Yuriy","Olga", "Nazar", "Artem", "Maks","Arsen","Boris"};
         String[] employeeGender = {"Woman","Man"};
         Random random = new Random();
         Employee[] randomEmployees = new Employee[size];

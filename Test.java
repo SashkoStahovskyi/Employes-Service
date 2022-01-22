@@ -21,10 +21,10 @@ public class Test {
         // ====================== EMPLOYEES SERVICE ========================== //
 
         EmployeeFactory employeeFactory = new EmployeeFactory();
-        Employee[] defaultEmployers = employeeFactory.getDefaultEmployees();
-        EmployeeService employeeService = new EmployeeService(defaultEmployers);
+        Employee[] randomEmployers = employeeFactory.generateEmployees(20);
+        EmployeeService employeeService = new EmployeeService(randomEmployers);
 
-        Employee[] randomEmployees = employeeFactory.generateEmployees(1); // метод генерує працівників
+        Employee[] randomEmployees = employeeFactory.generateEmployees(10); // метод генерує працівників
         for (Employee randomEmployee : randomEmployees) {
             print(randomEmployee);
             System.out.println();
@@ -38,12 +38,14 @@ public class Test {
 
         System.out.println("================Print Information ================");
 
-         employeeService.printEmployees(defaultEmployers);
+        employeeService.printEmployees(randomEmployees);
 
         System.out.println("================ sortByName ================");
 
         Employee[] employeesName = employeeService.sortByName(employeeFactory.generateEmployees(10));
-        System.out.println(Arrays.toString(employeesName));
+        for (Employee a : employeesName) {
+            System.out.println("name " + a.name);
+        }
         System.out.println();
 
         System.out.println("================ Total Salary================");
@@ -58,15 +60,16 @@ public class Test {
         System.out.println("Insert employee name : ");
         String findName = scanner.nextLine();
         Employee[] name = employeeService.getByName(findName);
-        employeeService.printEmployees(name);// виводить всих працівників, але потрібен лише той чиє імя задано !!
+        for (Employee employee : name) {
+            System.out.println("employee name: " + employee.name);
+        }
 
         System.out.println("================ sortByNameAndSalary ================");
 
-        Employee [] sortSalary = employeeService.sortByNameAndSalary(employeeFactory.generateEmployees(5));
-        employeeService.printEmployees(sortSalary);
-        //System.out.println(Arrays.toString(sortSalary));
-
-
+        Employee[] result = employeeService.sortByNameAndSalary(employeeFactory.generateEmployees(10));
+        for (Employee a : result) {
+            System.out.println("name " + a.name + " salary " + a.salary);
+        }
     }
 
     static void print(Employee employee) {
@@ -75,7 +78,6 @@ public class Test {
         System.out.println(" age " + employee.age);
         System.out.println(" salary " + employee.salary);
         System.out.println(" gender " + employee.gender);
-
 
     }
 }
