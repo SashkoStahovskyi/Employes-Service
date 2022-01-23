@@ -66,7 +66,7 @@ public class Test {
 
         System.out.println("================ sortByNameAndSalary ================");
 
-        Employee[] result = employeeService.sortByNameAndSalary(employeeFactory.generateEmployees(10));
+        Employee[] result = employeeService.sortByNameAndSalary(employeeFactory.generateEmployees(15));
         for (Employee a : result) {
             System.out.println("name " + a.name + " salary " + a.salary);
         }

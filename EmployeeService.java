@@ -88,7 +88,7 @@ public class EmployeeService extends Employee {
                 Employee employeeFirst = employees[j - 1];
                 Employee employeeSecond = employees[j];
 
-                if (isBiggerName(employeeFirst, employeeSecond) && (employeeFirst.salary > employeeSecond.salary)) {
+                if (compareByNameAndSalary(employeeFirst, employeeSecond)) {
                     Employee temp = employees[j - 1];
                     employees[j - 1] = employees[j];
                     employees[j] = temp;
@@ -98,7 +98,23 @@ public class EmployeeService extends Employee {
         return employees;
     }
 
+    public boolean compareByNameAndSalary(Employee first, Employee second) {
+        String firstName = first.name;
+        String secondName = second.name;
+        int firstSalary = first.salary;
+        int secondSalary = second.salary;
 
+        if (firstName.compareTo(secondName) > 0) {
+            return true;
+        }
+        if (firstName.compareTo(secondName) < 0) {
+            return false;
+        }
+        if (firstName.compareTo(secondName) == 0)
+            return firstSalary > secondSalary;
+
+        return false;
+    }
 }
 
 
