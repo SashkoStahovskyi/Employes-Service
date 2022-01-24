@@ -42,7 +42,7 @@ public class Test {
 
         System.out.println("================ sortByName ================");
 
-        Employee[] employeesName = employeeService.sortByName(employeeFactory.generateEmployees(10));
+        Employee[] employeesName = employeeService.sortByName(employeeFactory.generateEmployees(5));
         for (Employee a : employeesName) {
             System.out.println("name " + a.name);
         }
@@ -66,10 +66,18 @@ public class Test {
 
         System.out.println("================ sortByNameAndSalary ================");
 
-        Employee[] result = employeeService.sortByNameAndSalary(employeeFactory.generateEmployees(15));
+        Employee[] result = employeeService.sortByNameAndSalary(employeeFactory.generateEmployees(5));
         for (Employee a : result) {
             System.out.println("name " + a.name + " salary " + a.salary);
         }
+
+        System.out.println("================ edit ================");
+        System.out.println();
+
+        System.out.println("insert employee id : ");
+        Employee employee = employeeService.edit(employeeService);
+        print(employee);
+
     }
 
     static void print(Employee employee) {

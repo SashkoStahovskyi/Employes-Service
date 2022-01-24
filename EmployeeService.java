@@ -115,6 +115,31 @@ public class EmployeeService extends Employee {
 
         return false;
     }
+
+    //находит сотрудника по id, и подменяет информацию о нем на новую. Старую версию сотрудника метод возвращает
+
+    Employee edit(Employee employee) {
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+        employee.id = scanner.nextInt();
+        Employee currentEmployeeId = getById(employee.id);  //getById(random.nextInt(1)+5);
+
+        Employee newEmployee = new Employee();
+        newEmployee.name = employee.name;
+        newEmployee.gender = employee.gender;
+        newEmployee.salary = random.nextInt(300) + 5500;
+        newEmployee.age = random.nextInt(25) + 100;
+        newEmployee.id = random.nextInt(1) + 5;
+
+        Employee oldEmployeeVersion;
+        oldEmployeeVersion = currentEmployeeId;
+        currentEmployeeId = newEmployee;
+
+        return oldEmployeeVersion;
+
+    }
 }
+
+
 
 
