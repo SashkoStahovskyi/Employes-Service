@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class EmployeeFactory extends Employee {
+public class EmployeeFactory {
 
     Employee[] getDefaultEmployees() {
 

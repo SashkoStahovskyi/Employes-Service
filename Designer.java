@@ -2,9 +2,9 @@ public class Designer extends Employee {
     int rate;
     int workedDays;
 
-    Designer(int designerId, String designerName, int designerAge,
+    Designer(int Id, String designerName, int designerAge,
              int designerSalary, String designerGender, int designerRate, int designerWorkedDays) {
-        id = designerId;
+        id = Id;
         name = designerName;
         age = designerAge;
         salary = designerSalary;

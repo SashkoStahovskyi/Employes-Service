@@ -1,4 +1,4 @@
-import java.util.*;
+
 import java.util.Scanner;
 
 
@@ -21,10 +21,12 @@ public class Test {
         // ====================== EMPLOYEES SERVICE ========================== //
 
         EmployeeFactory employeeFactory = new EmployeeFactory();
-        Employee[] randomEmployers = employeeFactory.generateEmployees(20);
+        Employee[] randomEmployers = employeeFactory.generateEmployees(5);
         EmployeeService employeeService = new EmployeeService(randomEmployers);
 
-        Employee[] randomEmployees = employeeFactory.generateEmployees(10); // метод генерує працівників
+        System.out.println("================ generateEmployees ================");
+
+        Employee[] randomEmployees = employeeFactory.generateEmployees(5); // метод генерує працівників
         for (Employee randomEmployee : randomEmployees) {
             print(randomEmployee);
             System.out.println();
@@ -38,7 +40,7 @@ public class Test {
 
         System.out.println("================Print Information ================");
 
-        employeeService.printEmployees(randomEmployees);
+        employeeService.printEmployees();
 
         System.out.println("================ sortByName ================");
 
@@ -74,9 +76,28 @@ public class Test {
         System.out.println("================ edit ================");
         System.out.println();
 
-        System.out.println("insert employee id : ");
-        Employee employee = employeeService.edit(employeeService);
-        print(employee);
+        Manager newManager = new Manager("Denis", 4, 35, 3500, "transgender");
+        Employee empl = employeeService.edit(newManager);
+        print(empl);
+
+        System.out.println("================  ================");
+        employeeService.printEmployees();
+
+        System.out.println("================ remove ================");
+        System.out.println();
+
+        Employee deleteEmployee = employeeService.remove(4);
+        print(deleteEmployee);
+
+        System.out.println("================ add ================");
+        System.out.println();
+        employeeService.printEmployees();
+        System.out.println("----------------------------------");
+
+        Designer newDesigner = new Designer(15, "Rudolf", 55, 5500, "man", 5, 24);
+        employeeService.add(newDesigner);
+        employeeService.printEmployees();
+
 
     }
 
@@ -86,6 +107,7 @@ public class Test {
         System.out.println(" age " + employee.age);
         System.out.println(" salary " + employee.salary);
         System.out.println(" gender " + employee.gender);
+
 
     }
 }

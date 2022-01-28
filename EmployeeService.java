@@ -1,10 +1,9 @@
 import java.util.*;
 
-public class EmployeeService extends Employee {
+public class EmployeeService {
     Employee[] employees;
 
     public EmployeeService(Employee[] employees) {
-        super();
         this.employees = employees;
     }
 
@@ -37,13 +36,13 @@ public class EmployeeService extends Employee {
         return nameArray;
     }
 
-    public void printEmployees(Employee[] employees) {
+    public void printEmployees() {
         for (Employee currentEmployees : employees) {
-            System.out.println("Employee Id " + currentEmployees.id);
-            System.out.println("Employee name " + currentEmployees.name);
-            System.out.println("Employee salary " + currentEmployees.salary);
-            System.out.println("Employee gender " + currentEmployees.gender);
-            System.out.println("Employee age " + currentEmployees.age);
+            System.out.println(" Id " + currentEmployees.id);
+            System.out.println(" name " + currentEmployees.name);
+            System.out.println(" salary " + currentEmployees.salary);
+            System.out.println(" gender " + currentEmployees.gender);
+            System.out.println(" age " + currentEmployees.age);
         }
     }
 
@@ -116,29 +115,52 @@ public class EmployeeService extends Employee {
         return false;
     }
 
-    //находит сотрудника по id, и подменяет информацию о нем на новую. Старую версию сотрудника метод возвращает
-
     Employee edit(Employee employee) {
-        Random random = new Random();
-        Scanner scanner = new Scanner(System.in);
-        employee.id = scanner.nextInt();
-        Employee currentEmployeeId = getById(employee.id);  //getById(random.nextInt(1)+5);
+        for (int i = 0; i < employees.length; i++) {
+            Employee currentEmployee = employees[i];
+            if (currentEmployee.id == employee.id) {
+                employees[i] = employee;
+                return currentEmployee;
+            }
+        }
+        return null;
+    }
 
-        Employee newEmployee = new Employee();
-        newEmployee.name = employee.name;
-        newEmployee.gender = employee.gender;
-        newEmployee.salary = random.nextInt(300) + 5500;
-        newEmployee.age = random.nextInt(25) + 100;
-        newEmployee.id = random.nextInt(1) + 5;
+    Employee remove(long id) {
+        int count = employees.length;
+        for (int i = 0; i < count; i++) {
+            Employee current = employees[i];
+            if (current.id == id) {
+                employees[i] = employees[i + 1];
+                return current;
+            }
+            count = employees.length - 1;
+            Employee[] array = new Employee[count];
+            for (int j = 0; j < array.length; j++) {
+                array[i] = employees[i];
+            }
+        }
+        return null;
+    }
 
-        Employee oldEmployeeVersion;
-        oldEmployeeVersion = currentEmployeeId;
-        currentEmployeeId = newEmployee;
+    void add(Employee newEmployee) {
 
-        return oldEmployeeVersion;
-
+        int count = 0;
+        for (int i = 0; i < employees.length; i++) {
+            count++;
+        }
+        Employee[] newArray = new Employee[count+1];
+        for (int j = 0; j < newArray.length - 1; j++) {
+            newArray[j] = employees[j];
+            newArray[count] = newEmployee;
+        }
+        employees = newArray;
     }
 }
+
+
+
+
 
 
 
